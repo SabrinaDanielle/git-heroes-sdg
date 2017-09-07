@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Herosform from '../Heroes/Heroform'
 
 const HEROES = [
   { id: 11, name: "Mr. Nice" },
@@ -84,21 +85,12 @@ class App extends Component {
        <ul className="heroes">{heroList}</ul>
        <div>
         <h2>{this.state.selectedHero.name}</h2>
-         <div>
-           <label>id: </label>
-           {this.state.selectedHero.id}
-         </div>
-         <form onSubmit={this.handleOnSubmit}>
-         <label>name: </label>
-         <input type="text" value=
-         {this.state.selectedHero.name}
-         onChange={this.handleOnChange}
-         />
-         <input className="button" type="submit"
-          value="submit" />
-         </form>
-       </div>
+        <Herosform
+          selectedHero={this.state.selectedHero}
+          handleOnChange={() => this.handleOnChange}
+          handleOnSubmit={() => this.handleOnSubmit} />
      </div>
+    </div>
     );
   }
 }
