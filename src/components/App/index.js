@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Herosform from '../Heroes/Heroform'
+import HeroesForm from '../Heroes/HeroesForm';
+import HeroesList from '../Heroes/Heroslist';
 
 const HEROES = [
   { id: 11, name: "Mr. Nice" },
@@ -66,30 +67,21 @@ class App extends Component {
   }
 
   render(){
-    const heroList = this.state.heroes.map(function
-    (hero) {
-    return (
-      <li
-      className="" 
-      key={hero.id} 
-      onClick={() => this.handleSelectHero(hero)}>
-      <span className="badge">{hero.id}
-      </span> {hero.name}
-      </li>
-    );
-  }, this);
-
     return (
      <div>
        <h1>{this.state.title}</h1>
-       <ul className="heroes">{heroList}</ul>
+       <HeroesList
+         heroes={this.state.heroes}
+         selectedHero={this.state.selectedHero}
+         onHeroClick={this.handleSelectHero}
+         />
        <div>
-        <h2>{this.state.selectedHero.name}</h2>
-        <Herosform
+        <h2>{this.state.selectedHero.name} Details!!!!</h2>
+        <HeroesForm
           selectedHero={this.state.selectedHero}
           handleOnChange={() => this.handleOnChange}
           handleOnSubmit={() => this.handleOnSubmit} />
-     </div>
+    </div>
     </div>
     );
   }
