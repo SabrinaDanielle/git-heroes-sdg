@@ -1,24 +1,22 @@
-const HEROES = [
-    { id: 11, name: "Mr. Nice" },
-    { id: 12, name: "Narco" },
-    { id: 13, name: "Bombasto" },
-    { id: 14, name: "Celeritas" },
-    { id: 15, name: "Magneta" },
-    { id: 16, name: "RubberMan" },
-    { id: 17, name: "Dynama" },
-    { id: 18, name: "Dr IQ" },
-    { id: 19, name: "Magma" },
-    { id: 20, name: "Tornado" }
-  ];
+// import { ADD_HERO } from "../constants/ActionTypes";
+//Base URL
+const BASE_URL = "https://api.github.com/users/";
 
-  const getHeroes = new Promise((resolve, reject) => {
-    resolve(HEROES);
+const fetchGitHero = name =>
+  fetch(
+    `${BASE_URL}${name}?access_token=b6a72da4734002afbebb8344c743af278072ca12`
+  )
+    .then(status)
+    .then(payload => payload.json())
+    .then(user => user)
+    .catch(error => {
+      return Promise.reject(error);
+    });
 
-  });
-
-  const getHeroesSlowly = new Promise((resolve, reject) => {
-    setTimeout(() => resolve(HEROES), 2000);
-
-  });
-
-  export {getHeroes, getHeroesSlowly};
+function status(res) {
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res;
+}
+export { fetchGitHero };
